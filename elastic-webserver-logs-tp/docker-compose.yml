@@ -1,0 +1,155 @@
+version: '3.7'
+
+services:
+  # Elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
+    container_name: elasticsearch
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=docker-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Kibana
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.1
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - elastic
+
+  # Logstash
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.11.1
+    container_name: logstash
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+    ports:
+      - 5044:5044
+      - 9600:9600
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elastic
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+
+  # Apache server with log generator
+  apache:
+    image: httpd:2.4
+    container_name: apache
+    volumes:
+      - ./apache/logs:/usr/local/apache2/logs
+      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./apache/log-generator.sh:/log-generator.sh
+    command: /bin/bash -c "chmod +x /log-generator.sh && /log-generator.sh & httpd-foreground"
+    networks:
+      - elastic
+
+  # Nginx server with log generator
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx/logs:/var/log/nginx
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/log-generator.sh:/log-generator.sh
+    command: /bin/bash -c "chmod +x /log-generator.sh && /log-generator.sh & nginx -g 'daemon off;'"
+    networks:
+      - elastic
+
+  # Custom web server with JSON logs
+  custom-web:
+    image: alpine:latest
+    container_name: custom-web
+    volumes:
+      - ./custom-web/logs:/logs
+      - ./custom-web/log-generator.sh:/log-generator.sh
+    command: /bin/sh -c "chmod +x /log-generator.sh && /log-generator.sh"
+    networks:
+      - elastic
+
+  # Filebeat
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.11.1
+    container_name: filebeat
+    user: root
+    volumes:
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./apache/logs:/logs/apache:ro
+      - ./nginx/logs:/logs/nginx:ro
+      - ./custom-web/logs:/logs/custom-web:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: filebeat -e -strict.perms=false
+    networks:
+      - elastic
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+
+  # Metricbeat
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:8.11.1
+    container_name: metricbeat
+    user: root
+    volumes:
+      - ./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /proc:/hostfs/proc:ro
+      - /:/hostfs:ro
+    command: metricbeat -e -strict.perms=false
+    networks:
+      - elastic
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+
+  # Setup service for ingest pipeline
+  setup:
+    image: curlimages/curl:latest
+    container_name: setup
+    volumes:
+      - ./setup:/setup
+    command: ["sh", "/setup/setup-ingest-pipeline.sh"]
+    networks:
+      - elastic
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+
+  
+
+networks:
+  elastic:
+    driver: bridge
+
+volumes:
+  elasticsearch-data:

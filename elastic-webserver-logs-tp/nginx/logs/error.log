@@ -1,0 +1,88 @@
+2025/05/21 09:39:11 [notice] 8#8: using the "epoll" event method
+2025/05/21 09:39:11 [notice] 8#8: nginx/1.27.5
+2025/05/21 09:39:11 [notice] 8#8: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2025/05/21 09:39:11 [notice] 8#8: OS: Linux 5.15.133.1-microsoft-standard-WSL2
+2025/05/21 09:39:11 [notice] 8#8: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/05/21 09:39:11 [notice] 8#8: start worker processes
+2025/05/21 09:39:11 [notice] 8#8: start worker process 21
+2025/05/21 09:39:11 [notice] 8#8: start worker process 22
+2025/05/21 09:39:11 [notice] 8#8: start worker process 23
+2025/05/21 09:39:11 [notice] 8#8: start worker process 24
+2025/05/21 09:39:11 [notice] 8#8: start worker process 25
+2025/05/21 09:39:11 [notice] 8#8: start worker process 26
+2025/05/21 09:39:11 [notice] 8#8: start worker process 27
+2025/05/21 09:39:11 [notice] 8#8: start worker process 28
+2025/05/21 09:39:11 [notice] 8#8: start worker process 29
+2025/05/21 09:39:11 [notice] 8#8: start worker process 30
+2025/05/21 09:39:11 [notice] 8#8: start worker process 31
+2025/05/21 09:39:11 [notice] 8#8: start worker process 32
+2025/05/21 09:39:11 [notice] 8#8: start worker process 35
+2025/05/21 09:39:11 [notice] 8#8: start worker process 36
+2025/05/21 09:39:11 [notice] 8#8: start worker process 37
+2025/05/21 09:39:11 [notice] 8#8: start worker process 38
+2025/05/21 09:42:43 [notice] 9#9: using the "epoll" event method
+2025/05/21 09:42:43 [notice] 9#9: nginx/1.27.5
+2025/05/21 09:42:43 [notice] 9#9: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2025/05/21 09:42:43 [notice] 9#9: OS: Linux 5.15.133.1-microsoft-standard-WSL2
+2025/05/21 09:42:43 [notice] 9#9: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/05/21 09:42:43 [notice] 9#9: start worker processes
+2025/05/21 09:42:43 [notice] 9#9: start worker process 19
+2025/05/21 09:42:43 [notice] 9#9: start worker process 20
+2025/05/21 09:42:43 [notice] 9#9: start worker process 21
+2025/05/21 09:42:43 [notice] 9#9: start worker process 22
+2025/05/21 09:42:43 [notice] 9#9: start worker process 23
+2025/05/21 09:42:43 [notice] 9#9: start worker process 24
+2025/05/21 09:42:43 [notice] 9#9: start worker process 25
+2025/05/21 09:42:43 [notice] 9#9: start worker process 28
+2025/05/21 09:42:43 [notice] 9#9: start worker process 29
+2025/05/21 09:42:43 [notice] 9#9: start worker process 30
+2025/05/21 09:42:43 [notice] 9#9: start worker process 31
+2025/05/21 09:42:43 [notice] 9#9: start worker process 33
+2025/05/21 09:42:43 [notice] 9#9: start worker process 34
+2025/05/21 09:42:43 [notice] 9#9: start worker process 35
+2025/05/21 09:42:43 [notice] 9#9: start worker process 36
+2025/05/21 09:42:43 [notice] 9#9: start worker process 37
+2025/05/21 10:21:06 [notice] 8#8: using the "epoll" event method
+2025/05/21 10:21:06 [notice] 8#8: nginx/1.27.5
+2025/05/21 10:21:06 [notice] 8#8: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2025/05/21 10:21:06 [notice] 8#8: OS: Linux 5.15.133.1-microsoft-standard-WSL2
+2025/05/21 10:21:06 [notice] 8#8: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/05/21 10:21:06 [notice] 8#8: start worker processes
+2025/05/21 10:21:06 [notice] 8#8: start worker process 19
+2025/05/21 10:21:06 [notice] 8#8: start worker process 20
+2025/05/21 10:21:06 [notice] 8#8: start worker process 21
+2025/05/21 10:21:06 [notice] 8#8: start worker process 22
+2025/05/21 10:21:06 [notice] 8#8: start worker process 23
+2025/05/21 10:21:06 [notice] 8#8: start worker process 24
+2025/05/21 10:21:06 [notice] 8#8: start worker process 25
+2025/05/21 10:21:06 [notice] 8#8: start worker process 26
+2025/05/21 10:21:06 [notice] 8#8: start worker process 27
+2025/05/21 10:21:06 [notice] 8#8: start worker process 28
+2025/05/21 10:21:06 [notice] 8#8: start worker process 29
+2025/05/21 10:21:06 [notice] 8#8: start worker process 30
+2025/05/21 10:21:06 [notice] 8#8: start worker process 31
+2025/05/21 10:21:06 [notice] 8#8: start worker process 32
+2025/05/21 10:21:06 [notice] 8#8: start worker process 33
+2025/05/21 10:21:06 [notice] 8#8: start worker process 34
+2025/05/21 11:32:07 [notice] 8#8: using the "epoll" event method
+2025/05/21 11:32:07 [notice] 8#8: nginx/1.27.5
+2025/05/21 11:32:07 [notice] 8#8: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2025/05/21 11:32:07 [notice] 8#8: OS: Linux 5.15.133.1-microsoft-standard-WSL2
+2025/05/21 11:32:07 [notice] 8#8: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/05/21 11:32:07 [notice] 8#8: start worker processes
+2025/05/21 11:32:07 [notice] 8#8: start worker process 23
+2025/05/21 11:32:07 [notice] 8#8: start worker process 24
+2025/05/21 11:32:07 [notice] 8#8: start worker process 25
+2025/05/21 11:32:07 [notice] 8#8: start worker process 26
+2025/05/21 11:32:07 [notice] 8#8: start worker process 27
+2025/05/21 11:32:07 [notice] 8#8: start worker process 28
+2025/05/21 11:32:07 [notice] 8#8: start worker process 29
+2025/05/21 11:32:07 [notice] 8#8: start worker process 30
+2025/05/21 11:32:07 [notice] 8#8: start worker process 31
+2025/05/21 11:32:07 [notice] 8#8: start worker process 32
+2025/05/21 11:32:07 [notice] 8#8: start worker process 33
+2025/05/21 11:32:07 [notice] 8#8: start worker process 34
+2025/05/21 11:32:07 [notice] 8#8: start worker process 35
+2025/05/21 11:32:07 [notice] 8#8: start worker process 36
+2025/05/21 11:32:07 [notice] 8#8: start worker process 37
+2025/05/21 11:32:07 [notice] 8#8: start worker process 38

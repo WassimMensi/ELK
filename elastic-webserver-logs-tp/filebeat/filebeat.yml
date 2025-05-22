@@ -1,0 +1,54 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /logs/custom/logs.json
+    json.keys_under_root: true
+    json.add_error_key: true
+    json.message_key: log
+    tags: ["custom-web", "json"]
+    fields:
+      source_type: custom_web
+    fields_under_root: true
+
+filebeat.modules:
+  - module: apache
+    access:
+      enabled: true
+      var.paths: ["/logs/apache/access.log"]
+    error:
+      enabled: true
+      var.paths: ["/logs/apache/error.log"]
+
+  - module: nginx
+    access:
+      enabled: true
+      var.paths: ["/logs/nginx/access.log"]
+    error:
+      enabled: true
+      var.paths: ["/logs/nginx/error.log"]
+
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_fields:
+      target: unified_log
+      fields:
+        version: 1.0.0
+
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
+  index: "unified-logs-%{+yyyy.MM.dd}"
+
+setup.template.name: "unified-logs"
+setup.template.pattern: "unified-logs-*"
+setup.template.enabled: true
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat
+  keepfiles: 7
+  permissions: 0644
